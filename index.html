@@ -37,7 +37,11 @@
         <div
           class="pt-2 w-full flex justify-center items-center lg:p-0 lg:w-1/4"
         >
-          <a href="/" class="px-8 text-2xl font-bold lg:p-0">台灣軟體業薪水</a>
+          <a
+            href="https://zhong1016.github.io/software-salaries/"
+            class="px-8 text-2xl font-bold lg:p-0"
+            >台灣軟體業薪水</a
+          >
           <a
             href="https://github.com/zhong1016/software-salaries"
             target="_blank"
@@ -94,7 +98,7 @@
           </a>
         </div>
       </div>
-      <div class="h-[calc(100%-64px)] hidden lg:block">
+      <div class="h-[calc(100%-4rem)] hidden lg:block">
         <el-table
           v-loading="loading"
           :data="employee"
@@ -200,7 +204,7 @@
         </el-table>
       </div>
 
-      <div class="h-[calc(100%-80px)] block lg:hidden">
+      <div class="h-[calc(100%-10rem)] block lg:hidden">
         <el-table
           v-loading="loading"
           :data="employee"
@@ -211,38 +215,38 @@
           <el-table-column label="公司訊息 " align="center">
             <template #default="scope">
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 任職公司 :</div>
+                <div class="w-1/2">⬩任職公司:</div>
                 <div class="w-1/2">{{scope.row.companyName}}</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 任職職務 :</div>
+                <div class="w-1/2">⬩任職職務:</div>
                 <div class="w-1/2">{{scope.row.position}}</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 目前職級 :</div>
+                <div class="w-1/2">⬩目前職級:</div>
                 <div class="w-1/2">{{scope.row.jobLevel}}</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 相關年資 :</div>
+                <div class="w-1/2">⬩相關年資:</div>
                 <div class="w-1/2">{{scope.row.relevantExperience}} y</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 在職年資 :</div>
+                <div class="w-1/2">⬩在職年資:</div>
                 <div class="w-1/2">{{scope.row.currentTenure}} y</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 每月底薪 :</div>
+                <div class="w-1/2">⬩每月底薪:</div>
                 <div class="w-1/2">{{scope.row.monthlyBaseSalary}} w</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 總共獎金 :</div>
+                <div class="w-1/2">⬩總共獎金:</div>
                 <div class="w-1/2">
                   {{!!+scope.row.monthlyBonus ?`${+scope.row.monthlyBonus} w`
                   :scope.row.monthlyBonus}}
                 </div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 總共年薪 :</div>
+                <div class="w-1/2">⬩總共年薪:</div>
                 <div class="w-1/2">
                   {{!!+scope.row.totalAnnualCompensation
                   ?`${+scope.row.totalAnnualCompensation} w`
@@ -250,17 +254,17 @@
                 </div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 平均工時 :</div>
+                <div class="w-1/2">⬩平均工時:</div>
                 <div class="w-1/2">
                   {{scope.row.dailyAverageWorkingHours}} h
                 </div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 工作爽度 :</div>
+                <div class="w-1/2">⬩工作爽度:</div>
                 <div class="w-1/2">(1~5) {{scope.row.jobSatisfaction}}</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩ 總工作量 :</div>
+                <div class="w-1/2">⬩總工作量:</div>
                 <div class="w-1/2">(1~5) {{scope.row.loading}}</div>
               </div>
             </template>
