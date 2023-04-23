@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./dollar.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/dist/index.css"
+    />
+    <script src="https://unpkg.com/element-plus"></script>
+    <title>Software Salaries</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body,
+      #app {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="h-40 lg:h-16 flex flex-wrap">
+        <div
+          class="pt-2 w-full flex justify-center items-center lg:p-0 lg:w-1/4"
+        >
+          <a href="/" class="px-8 text-2xl lg:p-0">台灣軟體業薪水</a>
+          <a href="" class="lg:hidden">
+            <img class="h-8 w-8" src="./github.png" alt="github" />
+          </a>
+        </div>
+        <div
+          class="p-2 w-full flex items-center justify-center lg:py-0 lg:w-1/4 lg:justify-start"
+        >
+          <el-select
+            class="w-full lg:w-5/6"
+            v-model="companyValue"
+            placeholder="select company"
+            @change="companyChange"
+            filterable
+            clearable
+          >
+            <el-option
+              v-for="item in companyOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
+        <div
+          class="p-2 w-full flex items-center justify-center lg:py-0 lg:w-1/4 lg:justify-start"
+        >
+          <el-select
+            class="w-full lg:w-5/6"
+            v-model="salaryValue"
+            placeholder="select monthly salary"
+            @change="salaryChange"
+            filterable
+            clearable
+          >
+            <el-option
+              v-for="item in salaryOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
+
+        <div class="w-1/4 justify-center items-center hidden lg:flex">
+          <a href="">
+            <img class="h-10 w-10" src="./github.png" alt="github" />
+          </a>
+        </div>
+      </div>
+      <div class="h-[calc(100%-64px)] hidden lg:block">
+        <el-table :data="employee" style="width: 100%" border height="100%">
+          <el-table-column
+            align="center"
+            fixed
+            prop="companyName"
+            label="公司"
+            width="140"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="position"
+            label="職務"
+            sortable
+            width="140"
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="jobLevel"
+            label="職級"
+            width="120"
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="relevantExperience"
+            label="年資(Y)"
+            width="120"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="currentTenure"
+            label="現職(Y)"
+            width="120"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="monthlyBaseSalary"
+            label="月薪(W)"
+            width="120"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="monthlyBonus"
+            label="獎金(W)"
+            width="120"
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="totalAnnualCompensation"
+            label="總共年薪(W)"
+            width="140"
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="dailyAverageWorkingHours"
+            label="每日工時(H)"
+            width="140"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="monthlyOvertime"
+            label="每月加班(H)"
+            width="140"
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="overtimeFrequency"
+            label="加班頻率(D)"
+            width="140"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="jobSatisfaction"
+            label="爽度(1~5)"
+            width="140"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="loading"
+            label="工作量(1~5)"
+            width="140"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            align="center"
+            prop="supplement"
+            label="心得 || 建議 || 推薦 || 補充說明"
+            fixed="right"
+            width="400"
+          ></el-table-column>
+        </el-table>
+      </div>
+
+      <div class="h-[calc(100%-80px)] block lg:hidden">
+        <el-table :data="employee" style="width: 100%" border height="100%">
+          <el-table-column label="公司訊息 " align="center">
+            <template #default="scope">
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 任職公司 :</div>
+                <div class="w-1/2">{{scope.row.companyName}}</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 任職職務 :</div>
+                <div class="w-1/2">{{scope.row.position}}</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 目前職級 :</div>
+                <div class="w-1/2">{{scope.row.jobLevel}}</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 相關年資 :</div>
+                <div class="w-1/2">{{scope.row.relevantExperience}} y</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 在職年資 :</div>
+                <div class="w-1/2">{{scope.row.currentTenure}} y</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 每月底薪 :</div>
+                <div class="w-1/2">{{scope.row.monthlyBaseSalary}} w</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 總共獎金 :</div>
+                <div class="w-1/2">
+                  {{!!+scope.row.monthlyBonus ?`${+scope.row.monthlyBonus} w`
+                  :scope.row.monthlyBonus}}
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 總共年薪 :</div>
+                <div class="w-1/2">
+                  {{!!+scope.row.totalAnnualCompensation
+                  ?`${+scope.row.totalAnnualCompensation} w`
+                  :scope.row.totalAnnualCompensation}}
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 平均工時 :</div>
+                <div class="w-1/2">
+                  {{scope.row.dailyAverageWorkingHours}} h
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 工作爽度 :</div>
+                <div class="w-1/2">(1~5) {{scope.row.jobSatisfaction}}</div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩ 總工作量 :</div>
+                <div class="w-1/2">(1~5) {{scope.row.loading}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="supplement"
+            label="心得 || 建議 || 推薦"
+            fixed="right"
+          ></el-table-column>
+        </el-table>
+      </div>
+    </div>
+    <script>
+      const { ref } = Vue;
+
+      const getEmployee = () => {
+        return fetch('./employee.json').then((r) => r.json());
+      };
+
+      const App = {
+        setup() {
+          const employee = ref([]);
+          const employeeClone = ref([]);
+          const companyValue = ref('');
+          const companyOptions = ref([]);
+          const salaryValue = ref('');
+          const salaryOptions = [
+            {
+              value: 1,
+              label: '0 ~ 49999',
+            },
+            {
+              value: 2,
+              label: '50000 ~ 99999',
+            },
+            {
+              value: 3,
+              label: '100000 up',
+            },
+          ];
+
+          const companyChange = (company) => {
+            salaryValue.value = '';
+            if (!company) return (employee.value = employeeClone.value);
+            employee.value = employeeClone.value.filter(
+              (e) => e.companyName === company
+            );
+          };
+
+          const salaryChange = (salary) => {
+            companyValue.value = '';
+            if (!salary) return (employee.value = employeeClone.value);
+            employee.value = employeeClone.value.filter((e) => {
+              switch (salary) {
+                case 1:
+                  return e.monthlyBaseSalary < 5;
+                case 2:
+                  return e.monthlyBaseSalary >= 5 && e.monthlyBaseSalary < 10;
+                case 3:
+                  return e.monthlyBaseSalary >= 10;
+              }
+            });
+          };
+
+          const init = async () => {
+            let res = await getEmployee();
+            companyOptions.value = [
+              ...new Set(res.map((e) => e.companyName)),
+            ].map((e) => {
+              return {
+                value: e,
+                label: e,
+              };
+            });
+
+            employee.value = res;
+            employeeClone.value = structuredClone(res);
+          };
+
+          init();
+          return {
+            employee,
+            companyValue,
+            companyOptions,
+            companyChange,
+            salaryValue,
+            salaryOptions,
+            salaryChange,
+          };
+        },
+      };
+
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount('#app');
+    </script>
+  </body>
+</html>
