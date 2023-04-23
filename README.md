@@ -17,10 +17,10 @@
 ```text
 - dcard                     # 資料來源 Dcard 匿名表單
 - images                    # icon 
-- index.js                  # Vue3 js
 - README.md                 # 專案說明文檔
-- index.html                # HTML 模板文件
 - employee.json             # 分析表單資料後轉為 json
+- index.html                # HTML 模板文件
+- index.js                  # Vue3 js
 ```
 
 
