@@ -6,13 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Taiwan software salaries from Dcard." />
     <link rel="icon" href="./images/favicon.ico" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/element-plus/dist/index.css"
-    />
-    <script src="https://unpkg.com/element-plus"></script>
     <title>Software Salaries</title>
     <style>
       * {
@@ -30,6 +23,14 @@
         z-index: 9;
       }
     </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/dist/index.css"
+    />
   </head>
   <body>
     <div id="app">
@@ -47,7 +48,11 @@
             target="_blank"
             class="lg:hidden"
           >
-            <img class="h-8 w-8" src="./images/github.png" alt="github" />
+            <img
+              class="h-6 w-30"
+              src="https://img.shields.io/github/stars/zhong1016/software-salaries?style=social"
+              alt=""
+            />
           </a>
         </div>
         <div
@@ -88,13 +93,16 @@
             />
           </el-select>
         </div>
-
         <div class="w-1/4 justify-center items-center hidden lg:flex">
           <a
             href="https://github.com/zhong1016/software-salaries"
             target="_blank"
           >
-            <img class="h-10 w-10" src="./images/github.png" alt="github" />
+            <img
+              class="h-6 w-30"
+              src="https://img.shields.io/github/stars/zhong1016/software-salaries?style=social"
+              alt=""
+            />
           </a>
         </div>
       </div>
