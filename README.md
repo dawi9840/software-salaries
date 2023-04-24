@@ -11,9 +11,15 @@
 
 - Link : [https://zhong1016.github.io/software-salaries/](https://zhong1016.github.io/software-salaries/)
 
+### 技術工具 ✨
+
+- Vue3: 使用 Setup 開發 , 搭配 Composition API
+- Elemen Plus : 使用 Table 與 Select 組件 , 搭配 loading 樣式
+- Tailwind CSS : 簡易實現 RWD 與 Layout
+
 ### API ✨
 
-- 使用 ./employee.json ，資料來源為 ./dcard/純軟薪水 Dcard 匿名表單.html 資訊
+- 使用 ./employee.json ，資料來源為 ./dcard/純軟薪水 Dcard 匿名表單.html
 
 ### 目錄結構 ✨
 
