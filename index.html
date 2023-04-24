@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Taiwan software salaries from Dcard." />
-    <link rel="icon" href="./images/dollar.ico" />
+    <link rel="icon" href="./images/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <link
@@ -130,34 +130,34 @@
           <el-table-column
             align="center"
             prop="relevantExperience"
-            label="年資(Y)"
+            label="年資(年)"
             width="120"
             sortable
           ></el-table-column>
           <el-table-column
             align="center"
             prop="currentTenure"
-            label="現職(Y)"
+            label="現職(年)"
             width="120"
             sortable
           ></el-table-column>
           <el-table-column
             align="center"
             prop="monthlyBaseSalary"
-            label="月薪(W)"
+            label="月薪(萬)"
             width="120"
             sortable
           ></el-table-column>
           <el-table-column
             align="center"
             prop="monthlyBonus"
-            label="獎金(W)"
+            label="Bonus(月)"
             width="120"
           ></el-table-column>
           <el-table-column
             align="center"
             prop="totalAnnualCompensation"
-            label="總共年薪(W)"
+            label="總共年薪(萬)"
             width="140"
           ></el-table-column>
           <el-table-column
@@ -176,8 +176,8 @@
           <el-table-column
             align="center"
             prop="overtimeFrequency"
-            label="加班頻率(D)"
-            width="140"
+            label="加班頻率(1~5)"
+            width="160"
             sortable
           ></el-table-column>
           <el-table-column
@@ -199,7 +199,7 @@
             prop="supplement"
             label="心得 || 建議 || 推薦 || 補充說明"
             fixed="right"
-            width="400"
+            width="360"
           ></el-table-column>
         </el-table>
       </div>
@@ -239,18 +239,17 @@
                 <div class="w-1/2">{{scope.row.monthlyBaseSalary}} w</div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-1/2">⬩總共獎金:</div>
+                <div class="w-1/2">⬩獎金分紅:</div>
                 <div class="w-1/2">
-                  {{!!+scope.row.monthlyBonus ?`${+scope.row.monthlyBonus} w`
-                  :scope.row.monthlyBonus}}
+                  {{scope.row.monthlyBonus }} {{ !!+scope.row.monthlyBonus ? 'm'
+                  : ''}}
                 </div>
               </div>
               <div class="flex flex-wrap">
                 <div class="w-1/2">⬩總共年薪:</div>
                 <div class="w-1/2">
-                  {{!!+scope.row.totalAnnualCompensation
-                  ?`${+scope.row.totalAnnualCompensation} w`
-                  :scope.row.totalAnnualCompensation}}
+                  {{scope.row.totalAnnualCompensation}}
+                  {{!!+scope.row.totalAnnualCompensation ? 'w' : ''}}
                 </div>
               </div>
               <div class="flex flex-wrap">
@@ -258,6 +257,16 @@
                 <div class="w-1/2">
                   {{scope.row.dailyAverageWorkingHours}} h
                 </div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩每月加班:</div>
+                <div class="w-1/2">
+                  {{scope.row.dailyAverageWorkingHours}} h
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="w-1/2">⬩加班頻率:</div>
+                <div class="w-1/2">(1~5) {{scope.row.overtimeFrequency}}</div>
               </div>
               <div class="flex flex-wrap">
                 <div class="w-1/2">⬩工作爽度:</div>
@@ -278,6 +287,6 @@
         </el-table>
       </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>
